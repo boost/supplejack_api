@@ -18,7 +18,14 @@ module SupplejackApi
     end
     
     def matches?(request)
+      Rails.logger.info '--------------------------------------------------------'
+      Rails.logger.info request.remote_ip
+      Rails.logger.info '--------------------------------------------------------'
+
       forwarded_ips(request).each {|ip| return false unless @ips.include?(ip) }
+
+      Rails.logger.info @ips.include?(request.remote_ip)
+
       @ips.include?(request.remote_ip)
     end
     
